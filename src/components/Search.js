@@ -1,5 +1,6 @@
 import debounce from "lodash.debounce";
 import React, { useContext, useState } from "react";
+import Searchicon from "../assets/search-icon.svg";
 import { Cryptodata } from "./Context/Data";
 
 const Search = () => {
@@ -9,7 +10,7 @@ const Search = () => {
   }, 2000);
   return (
     <>
-      <h4>Search functionality</h4>
+      <Searchinput handleSearch={lodashfunc} />
     </>
   );
 };
