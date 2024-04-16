@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Cryptodata } from "./Context/Data";
 import { Link } from "react-router-dom";
 import { FavouriteContext } from "./Context/FavContext";
