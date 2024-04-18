@@ -33,6 +33,22 @@ const Pagination = () => {
     }
   };
 
+  const dottedNext = () => {
+    if (Page == LastPage) {
+      return null;
+    } else {
+      SetPage(Page + 2);
+    }
+  };
+
+  const dottedPrev = () => {
+    if (Page < 1) {
+      return null;
+    } else {
+      SetPage(Page - 2);
+    }
+  };
+
   if (cryptoData && cryptoData.length >= PerPage) {
     return (
       <>
