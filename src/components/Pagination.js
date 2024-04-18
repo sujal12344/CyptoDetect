@@ -17,6 +17,22 @@ const Pagination = () => {
     perpage.current.value = null;
   };
 
+  const next = () => {
+    if (Page == LastPage) {
+      return null;
+    } else {
+      SetPage(Page + 1);
+    }
+  };
+
+  const prev = () => {
+    if (Page < 1) {
+      return null;
+    } else {
+      SetPage(Page - 1);
+    }
+  };
+
   if (cryptoData && cryptoData.length >= PerPage) {
     return (
       <>
