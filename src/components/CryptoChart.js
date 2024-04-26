@@ -2,6 +2,23 @@ import React, { useContext, useLayoutEffect, useState } from "react";
 
 import { Cryptodata } from "./Context/Data";
 
+const ToolTipContent = ({ active, payload, label, currency = "usd" }) => {
+  if (active && payload && payload.length > 0) {
+    return (
+      <div className="custom-tooltip">
+        <p className="label text-sm text-grecyan">{`${label} : ${new Intl.NumberFormat(
+          "en-IN",
+          {
+            style: "currency",
+            currency: currency,
+            minimumFractionDigits: 5,
+          }
+        ).format(payload[0].value)}`}</p>
+      </div>
+    );
+  }
+};
+
 const CryptoChart = ({ id }) => {
   const [GraphData, SetGraphData] = useState();
   const [Days, Setdays] = useState(7);
