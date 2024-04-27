@@ -1,5 +1,14 @@
 import React, { useContext, useLayoutEffect, useState } from "react";
-
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  Tooltip,
+  CartesianGrid,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
 import { Cryptodata } from "./Context/Data";
 
 const ToolTipContent = ({ active, payload, label, currency = "usd" }) => {
@@ -17,6 +26,38 @@ const ToolTipContent = ({ active, payload, label, currency = "usd" }) => {
       </div>
     );
   }
+};
+
+const GraphInfo = ({ data, currency, type }) => {
+  return (
+    <>
+      <div className="w-[100%] pl-10 pt-10 h-[60%]">
+        <ResponsiveContainer>
+          <LineChart width={400} height={400} data={data}>
+            <Tooltip
+              stroke="#adefd1ff"
+              content={<ToolTipContent />}
+              currency={currency}
+              cursor={false}
+              wrapperStyle={{ outline: "none" }}
+            />
+
+            <Line
+              type="monotone"
+              dataKey={`${type}`}
+              strokeWidth={"1px"}
+              stroke="#adefd1ff"
+            />
+            <CartesianGrid />
+
+            <YAxis dataKey={`${type}`} domain={["auto", "auto"]} hide />
+            <XAxis dataKey="date" hide />
+            <Legend />
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
+    </>
+  );
 };
 
 const CryptoChart = ({ id }) => {
