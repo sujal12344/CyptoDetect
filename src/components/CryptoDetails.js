@@ -11,6 +11,32 @@ import { AiOutlineTwitter } from "react-icons/ai";
 import CryptoChart from "./CryptoChart";
 import { Cryptodata } from "./Context/Data";
 
+const HighLowBorder = ({ Price, High, Low }) => {
+  const [width, setWidth] = useState();
+
+  useLayoutEffect(() => {
+    let total = High - Low;
+    let HighWidth = ((High - Price) * 100) / total;
+    setWidth(Math.ceil(HighWidth));
+    console.log(width);
+  }, [Price, High, Low]);
+
+  return (
+    <>
+      <div className="w-full h-full mt-2   flex">
+        <span
+          className="h-2 bg-red border rounded-l-md"
+          style={{ width: `${100 - width}%` }}
+        ></span>
+        <span
+          className="h-2 bg-grecyan  border rounded-r-md "
+          style={{ width: `${width}%` }}
+        ></span>
+      </div>
+    </>
+  );
+};
+
 const CryptoDetails = () => {
   let { fetchModalCoin, Coin, currency } = useContext(Cryptodata);
   let navigate = useNavigate();
