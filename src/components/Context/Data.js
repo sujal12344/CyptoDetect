@@ -16,7 +16,6 @@ export const Data = ({ children }) => {
       console.log(err);
     }
   };
-
   return (
     <Cryptodata.Provider
       value={{
