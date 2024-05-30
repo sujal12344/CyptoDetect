@@ -1,8 +1,11 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
 
 export const Cryptodata = createContext({});
 
 export const Data = ({ children }) => {
+  const [cryptoData, getcryptoData] = useState();
+  const [TotalPages, SetTotalPages] = useState(250);
+
   const fetchModalCoin = async (coinid) => {
     try {
       const data = await fetch(
@@ -16,6 +19,31 @@ export const Data = ({ children }) => {
       console.log(err);
     }
   };
+
+  const fetchdata = async () => {
+    getcryptoData();
+    SetTotalPages(13220);
+
+    try {
+      const data = await fetch(
+        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&ids=${coinData}&order=${Sortby}&per_page=${PerPage}&page=${Page}&sparkline=false&price_change_percentage=1h%2C24h%2C7d`
+      )
+        .then((res) => res.json())
+        .then((json) => json);
+      getcryptoData(data);
+    } catch (err) {
+      console.log(err);
+    }
+    try {
+      const data = await fetch(`https://api.coingecko.com/api/v3/coins/list`)
+        .then((res) => res.json())
+        .then((json) => json);
+      SetTotalPages(data.length);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <Cryptodata.Provider
       value={{
