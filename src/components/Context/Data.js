@@ -4,7 +4,7 @@ export const Cryptodata = createContext({});
 
 export const Data = ({ children }) => {
   const [cryptoData, getcryptoData] = useState();
-  const [TotalPages, SetTotalPages] = useState(250);
+  const [searchData, setsearchData] = useState();
 
   const fetchModalCoin = async (coinid) => {
     try {
@@ -44,9 +44,24 @@ export const Data = ({ children }) => {
     }
   };
 
+  const fetchsearchdata = async (query) => {
+    try {
+      const data = await fetch(
+        `https://api.coingecko.com/api/v3/search?query=${query}`
+      )
+        .then((res) => res.json())
+        .then((json) => json);
+      setsearchData(data.coins);
+      console.log(data.coins);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <Cryptodata.Provider
       value={{
+        fetchsearchdata,
         fetchModalCoin,
       }}
     >
