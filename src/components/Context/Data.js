@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useLayoutEffect, useState } from "react";
 
 export const Cryptodata = createContext({});
 
@@ -57,11 +57,15 @@ export const Data = ({ children }) => {
       console.log(err);
     }
   };
+  useLayoutEffect(() => {
+    fetchdata();
+  }, [coinData, currency, Sortby, Page, PerPage]);
 
   return (
     <Cryptodata.Provider
       value={{
         fetchsearchdata,
+
         fetchModalCoin,
       }}
     >
