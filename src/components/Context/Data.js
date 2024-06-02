@@ -5,6 +5,12 @@ export const Cryptodata = createContext({});
 export const Data = ({ children }) => {
   const [cryptoData, getcryptoData] = useState();
   const [searchData, setsearchData] = useState();
+  const [coinData, setcoinData] = useState("");
+  const [currency, Setcurrency] = useState("usd");
+  const [Sortby, SetSortby] = useState("market_cap_desc");
+  const [Page, SetPage] = useState(1);
+  const [TotalPages, SetTotalPages] = useState(250);
+  const [PerPage, SetPerPage] = useState(10);
 
   const fetchModalCoin = async (coinid) => {
     try {
@@ -61,11 +67,18 @@ export const Data = ({ children }) => {
     fetchdata();
   }, [coinData, currency, Sortby, Page, PerPage]);
 
+  const resetFunc = () => {
+    SetPage(1);
+    setcoinData("");
+    Setcurrency("usd");
+    SetPerPage(10);
+  };
+
   return (
     <Cryptodata.Provider
       value={{
         fetchsearchdata,
-
+        resetFunc,
         fetchModalCoin,
       }}
     >
