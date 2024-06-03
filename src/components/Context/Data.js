@@ -11,6 +11,7 @@ export const Data = ({ children }) => {
   const [Page, SetPage] = useState(1);
   const [TotalPages, SetTotalPages] = useState(250);
   const [PerPage, SetPerPage] = useState(10);
+  const [Coin, getCoin] = useState();
 
   const fetchModalCoin = async (coinid) => {
     try {
@@ -77,8 +78,23 @@ export const Data = ({ children }) => {
   return (
     <Cryptodata.Provider
       value={{
+        cryptoData,
         fetchsearchdata,
+        searchData,
+        setcoinData,
+        setsearchData,
+        Setcurrency,
+        currency,
+        Sortby,
+        SetSortby,
+        Page,
+        SetPage,
+        TotalPages,
+        SetPerPage,
+        PerPage,
         resetFunc,
+        Coin,
+        getCoin,
         fetchModalCoin,
       }}
     >
