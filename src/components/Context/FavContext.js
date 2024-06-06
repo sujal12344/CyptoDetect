@@ -23,10 +23,20 @@ export const FavouriteData = ({ children }) => {
     }
   };
 
+  const Removecoin = async (Coinid) => {
+    const oldcoin = await JSON.parse(localStorage.getItem("coins"));
+    const newcoin = await oldcoin.filter((e) => {
+      return e != Coinid;
+    });
+    Setallcoins(newcoin);
+    localStorage.setItem("coins", JSON.stringify(newcoin));
+  };
+
   return (
     <FavouriteContext.Provider
       value={{
         setCoin,
+        Removecoin,
       }}
     >
       {children}
