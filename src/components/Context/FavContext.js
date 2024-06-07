@@ -11,6 +11,7 @@ export const FavouriteContext = createContext({});
 
 export const FavouriteData = ({ children }) => {
   const [allcoins, Setallcoins] = useState([]);
+  const [contextdata, SetContextdata] = useState();
 
   const setCoin = async (Coinid) => {
     const oldcoin = await JSON.parse(localStorage.getItem("coins"));
@@ -32,11 +33,29 @@ export const FavouriteData = ({ children }) => {
     localStorage.setItem("coins", JSON.stringify(newcoin));
   };
 
+  const saveddata = async (isValid = allcoins) => {
+    try {
+      const Fetcheddata = await fetch(
+        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&ids=${isValid.join(
+          ","
+        )}&order=${Sortby}&sparkline=false&price_change_percentage=1h%2C24h%2C7d`
+      )
+        .then((res) => res.json())
+        .then((json) => json);
+      console.log(Fetcheddata);
+      SetContextdata(Fetcheddata);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <FavouriteContext.Provider
       value={{
         setCoin,
         Removecoin,
+        allcoins,
+        contextdata,
       }}
     >
       {children}
