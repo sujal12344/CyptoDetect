@@ -49,6 +49,19 @@ export const FavouriteData = ({ children }) => {
     }
   };
 
+  useLayoutEffect(() => {
+    const isValid = JSON.parse(localStorage.getItem("coins")) || false;
+    if (!isValid) {
+      localStorage.setItem("coins", JSON.stringify([]));
+    } else {
+      Setallcoins(isValid);
+    }
+
+    if (isValid.length > 0) {
+      saveddata(isValid);
+    }
+  }, []);
+
   return (
     <FavouriteContext.Provider
       value={{
