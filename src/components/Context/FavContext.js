@@ -12,6 +12,7 @@ export const FavouriteContext = createContext({});
 export const FavouriteData = ({ children }) => {
   const [allcoins, Setallcoins] = useState([]);
   const [contextdata, SetContextdata] = useState();
+  const { currency, Sortby } = useContext(Cryptodata);
 
   const setCoin = async (Coinid) => {
     const oldcoin = await JSON.parse(localStorage.getItem("coins"));
@@ -48,6 +49,14 @@ export const FavouriteData = ({ children }) => {
       console.log(err);
     }
   };
+
+  useEffect(() => {
+    if (allcoins.length > 0) {
+      saveddata(allcoins);
+    } else {
+      SetContextdata();
+    }
+  }, [allcoins]);
 
   useLayoutEffect(() => {
     const isValid = JSON.parse(localStorage.getItem("coins")) || false;
