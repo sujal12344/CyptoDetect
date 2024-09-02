@@ -5,7 +5,7 @@
 This is a crypto details website<br />
 
 View Demo👇(in progress): <br />
-https://crypto-detect.vercel.app<br />
+https://cypto-detect.vercel.app<br />
 
 
 ### Images of The Crypto Screener Website:
